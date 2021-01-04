@@ -37,8 +37,8 @@ namespace AsyncSample.Services
             var tasks = cities
                 .Select(city => 
                 { 
-                    var task = GetAverageTemperatureData(city); 
-                    task.ContinueWith(x => _logger.LogInformation($"Data received for city: {city}")); 
+                    var task = GetAverageTemperatureCityData(city); 
+                    task.ContinueWith(x => _logger.LogInformation($"Weather data processed for city: {city}")); 
                     return task; 
                 });
 
@@ -47,7 +47,7 @@ namespace AsyncSample.Services
             return data.ToList();
         }
 
-        public async Task<WeatherForecastResultDto> GetAverageTemperatureData(string city)
+        private async Task<WeatherForecastResultDto> GetAverageTemperatureCityData(string city)
         {
             var millisecondsTimeout = 100;
 
@@ -67,9 +67,9 @@ namespace AsyncSample.Services
                         Temperature = weatherData.MainWeatherData.AverageTemperature
                     };
                 }
-                catch (TaskCanceledException)
+                catch (TaskCanceledException ex)
                 {
-                    this._logger.LogError($"Api call for city was longer than allowed");
+                    this._logger.LogError($"Token was cancelled", ex);
                     
                     return new WeatherForecastResultDto
                     {
