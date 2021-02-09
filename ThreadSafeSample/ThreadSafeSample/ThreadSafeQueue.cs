@@ -7,7 +7,7 @@ namespace ThreadSafeSample
     public class ThreadSafeQueue<T>
     {
         private List<T> data = new List<T>();
-        private object actionLock = new Object();
+        private static readonly object actionLock = new Object();
 
         public T Dequeue()
         {
