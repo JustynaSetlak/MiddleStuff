@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModelBinderSample", "CustomModelBinderSample\CustomModelBinderSample.csproj", "{B1D47507-9CD1-46B7-B043-13DE95F959E4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1D47507-9CD1-46B7-B043-13DE95F959E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1D47507-9CD1-46B7-B043-13DE95F959E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1D47507-9CD1-46B7-B043-13DE95F959E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1D47507-9CD1-46B7-B043-13DE95F959E4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {548C51B4-3A9B-470E-8D4B-27B5AF9DA0CE}
+	EndGlobalSection
+EndGlobal
