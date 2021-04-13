@@ -5,9 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace AuthorizationSample.ExtensionMethods
+namespace AuthorizationSample.Extensions
 {
-    public static class ServiceCollectionExtensionMethods
+    public static class ServiceCollectionExtensions
     {
         public static void ConfigureAuthentication(this IServiceCollection services)
         {

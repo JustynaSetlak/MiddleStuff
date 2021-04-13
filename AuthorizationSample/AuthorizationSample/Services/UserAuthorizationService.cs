@@ -5,7 +5,9 @@ using System.Security.Claims;
 using System.Text;
 using AuthorizationSample.Configuration;
 using AuthorizationSample.Constants;
+using AuthorizationSample.Dtos;
 using AuthorizationSample.Models;
+using AuthorizationSample.Results;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -23,26 +25,24 @@ namespace AuthorizationSample.Services
             _tokenConfiguration = tokenConfigurationOptions.Value;
         }
 
-        public string Login(UserCredentialData userCredentialData)
+        public ILoginResult Login(UserCredentialDataDto userCredentialDataDto)
         {
-            if (userCredentialData == null)
+            if (userCredentialDataDto == null)
             {
-                return null;
+                return new FailedLoginResult();
             }
 
-            if (userCredentialData.Password == AdministratorRolePassword)
+            var userRole = GetUserRole(userCredentialDataDto.Password);
+
+            if (string.IsNullOrEmpty(userRole))
             {
-                var token = GenerateToken(userCredentialData.UserName, Roles.AdministratorRole);
-                return new JwtSecurityTokenHandler().WriteToken(token);
+                return new FailedLoginResult();
             }
 
-            if (userCredentialData.Password == EmployeeRolePassword)
-            {
-                var token = GenerateToken(userCredentialData.UserName, Roles.EmployeeRole);
-                return new JwtSecurityTokenHandler().WriteToken(token);
-            }
+            var jwtSecurityToken = GenerateToken(userCredentialDataDto.UserName, userRole);
 
-            return null;
+            var token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+            return new SuccessfulLoginResult(token);
         }
 
         private JwtSecurityToken GenerateToken(string userName, string role)
@@ -59,6 +59,21 @@ namespace AuthorizationSample.Services
                 expires: DateTime.UtcNow.AddMinutes(15),
                 signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenConfiguration.Key)), SecurityAlgorithms.HmacSha256)
             );
+        }
+
+        private string GetUserRole(string password)
+        {
+            if (password == AdministratorRolePassword)
+            {
+                return Roles.AdministratorRole;
+            }
+
+            if (password == EmployeeRolePassword)
+            {
+                return Roles.EmployeeRole;
+            }
+
+            return string.Empty;
         }
     }
 }

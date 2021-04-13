@@ -1,9 +1,10 @@
-﻿using AuthorizationSample.Models;
+﻿using AuthorizationSample.Dtos;
+using AuthorizationSample.Results;
 
 namespace AuthorizationSample.Services
 {
     public interface IUserAuthorizationService
     {
-        string Login(UserCredentialData userCredentialData);
+        ILoginResult Login(UserCredentialDataDto userCredentialDataDto);
     }
 }

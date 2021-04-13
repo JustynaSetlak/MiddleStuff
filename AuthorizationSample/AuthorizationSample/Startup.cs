@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using AuthorizationSample.Configuration;
-using AuthorizationSample.ExtensionMethods;
+using AuthorizationSample.Extensions;
 using AuthorizationSample.Services;
 
 namespace AuthorizationSample

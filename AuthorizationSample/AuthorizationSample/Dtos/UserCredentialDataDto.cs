@@ -1,6 +1,6 @@
-﻿namespace AuthorizationSample.Models
+﻿namespace AuthorizationSample.Dtos
 {
-    public class UserCredentialData
+    public class UserCredentialDataDto
     {
         public string UserName { get; set; }
 
